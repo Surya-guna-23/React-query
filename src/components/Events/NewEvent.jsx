@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { queryclient } from "../../util/http.js";
+import { queryClient } from "../../util/http.js";
 import Modal from "../UI/Modal.jsx";
 import EventForm from "./EventForm.jsx";
 import { createNewEvent } from "../../util/http.js";
@@ -10,7 +10,7 @@ export default function NewEvent() {
   const { mutate, isPending, isError, error } = useMutation({
     mutationFn: createNewEvent,
     onSuccess: () => {
-      queryclient.invalidateQueries({ queryKey: ["events"] });
+      queryClient.invalidateQueries({ queryKey: ["events"] });
       navigate("/events");
     },
   });
